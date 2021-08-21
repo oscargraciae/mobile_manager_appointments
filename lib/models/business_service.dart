@@ -11,15 +11,15 @@ class BusinessService {
     this.isActive,
   });
 
-  DateTime createdAt;
-  DateTime updatedAt;
-  int id;
-  String name;
-  String description;
-  String price;
-  int time;
-  int businessId;
-  bool isActive;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? id;
+  String? name;
+  String? description;
+  String? price;
+  int? time;
+  int? businessId;
+  bool? isActive;
 
   factory BusinessService.fromJson(Map<String, dynamic> json) =>
     BusinessService(
@@ -35,8 +35,8 @@ class BusinessService {
   );
 
   Map<String, dynamic> toJson() => {
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt!.toIso8601String(),
+    "updatedAt": updatedAt!.toIso8601String(),
     "id": id,
     "name": name,
     "description": description,

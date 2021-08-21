@@ -17,8 +17,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
+
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
+
 
 dependencies:
   flutter:
@@ -30,17 +32,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  get: ^3.24.0
-  dio: ^3.0.10
-  dio_cookie_manager: ^1.0.0
-  cookie_jar: ^1.0.0
+  dio: ^4.0.0
+  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^3.0.1
   logger: ^0.9.4
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.6
   syncfusion_flutter_calendar: ^18.4.42
-  intl: ^0.16.1
-  
-  
-  onesignal_flutter: ^2.0.0
+  intl: ^0.17.0
+  url_launcher: ^6.0.0-nullsafety
+  google_maps_flutter: ^2.0.6
+  fluttericon: ^2.0.0
+  get: ^4.3.8
+  get_storage: ^2.0.3
 
 dev_dependencies:
   flutter_test:

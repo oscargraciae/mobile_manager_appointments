@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:reserly_manager/models/user.dart';
 import 'package:reserly_manager/services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,40 +10,37 @@ class LoginController extends GetxController {
 
   TextEditingController usernameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
-  
+
   final formKey = GlobalKey<FormState>();
 
-  goSignup() {
+  void goSignup() {
     Get.toNamed('/signup');
   }
 
-  handleLogin() async {
-    if (formKey.currentState.validate()) {
+  void handleLogin() async {
+    if (formKey.currentState!.validate()) {
       isLoading(true);
-      UserResponse response = await UserService().login(usernameCtrl.text, passwordCtrl.text);
-      print('Respuesta de Login');
+      UserResponse response = await UserService().login(usernameCtrl.text.trim(), passwordCtrl.text);
       if (!response.success) {
-        Get.snackbar('Error', response.message);
+          Get.snackbar(
+            'Opps!',
+            'Error de auth',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.black,
+            colorText: Colors.white,
+            icon: Icon(Icons.cancel_outlined, color: Colors.white,),
+          );
       } else {
-        // Get.snackbar('Conexion exitosa', response.user.email, backgroundColor: Colors.green);
-        Get.offNamed('/home');
+        Get.offAllNamed('/home');
       }
       isLoading(false);
     }
   }
 
-  logout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('qid');
+  void logout() async {
+    GetStorage box = GetStorage();
+    box.remove('qid');
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.remove('qid');
   }
-
-
-  // @override
-  // void onInit() async {
-  //   super.onInit();
-  //   UserResponse customers = await UserService().getCustomers();
-  //   print('Clientes');
-  //   print(customers);
-  // }
-
 }

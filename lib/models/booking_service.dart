@@ -2,13 +2,13 @@ import 'package:reserly_manager/models/business_service.dart';
 
 class BookingService {
   BookingService({
-    this.id,
-    this.nameService,
-    this.priceService,
-    this.timeService,
-    this.bookingId,
-    this.businessServiceId,
-    this.businessService,
+    required this.id,
+    required this.nameService,
+    required this.priceService,
+    required this.timeService,
+    required this.bookingId,
+    required this.businessServiceId,
+    required this.businessService,
   });
 
   int id;

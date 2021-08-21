@@ -4,8 +4,9 @@ import 'package:reserly_manager/models/booking.dart';
 import 'package:reserly_manager/services/booking_service.dart';
 
 class BookingDetailController extends GetxController {
-  var booking = Booking().obs;
-  var isLoading = true.obs;
+  // final booking = Booking().obs;
+  late Rx<Booking> booking;
+  RxBool isLoading = true.obs;
 
   @override
   void onReady() {
@@ -18,7 +19,6 @@ class BookingDetailController extends GetxController {
     isLoading(true);
     var response = await BookingService.toAccept(id);
     if(response['success']) {
-      // Get.snackbar('Aviso', 'Servicio aceptado.');
       fetchBooking(id);
     }
     isLoading(false);
@@ -27,16 +27,15 @@ class BookingDetailController extends GetxController {
     isLoading(true);
     var response = await BookingService.toCancel(id);
     if(response['success']) {
-      // Get.snackbar('Aviso', 'Servicio rechazado.');
       fetchBooking(id);
     }
     isLoading(false);
   }
 
   void fetchBooking(int id) async {
-    var response = await BookingService.get(id);
-    if (response.success) {
-      booking.value = response.booking;
+    BookingResponse response = await BookingService.get(id);
+    if (response.booking != null) {
+      booking.value = response.booking as Booking;
     }
     isLoading(false);
   }

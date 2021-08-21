@@ -16,7 +16,7 @@ class BookingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(DateFormat('d MMMM y').format(new DateTime.now())),
-        centerTitle: false,
+        centerTitle: true,
         elevation: 0,
         actions: [
           IconButton(
@@ -26,43 +26,10 @@ class BookingsPage extends StatelessWidget {
             },
           ),
         ],
-        backgroundColor: kSurfaceColor,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Container(
-          //   width: MediaQuery.of(context).size.width,
-          //   decoration: BoxDecoration(
-          //     color: kSurfaceColor,
-          //   ),
-          //   child: SafeArea(
-          //     child: Padding(
-          //       padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 24.0),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Text(
-          //             new DateFormat('d MMMM y').format(new DateTime.now()),
-          //             style: TextStyle(
-          //               fontWeight: FontWeight.w300,
-          //               fontSize: 14,
-          //               color: Colors.white,
-          //             ),
-          //           ),
-          //           Text(
-          //             'Hola, Oscar',
-          //             style: TextStyle(
-          //               fontWeight: FontWeight.w600,
-          //               fontSize: 20,
-          //               color: Colors.white,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(height: 16),
           Expanded(
             child: Container(
@@ -70,47 +37,44 @@ class BookingsPage extends StatelessWidget {
               child: Obx(() {
                 if (bookingsCtl.isLoading.value)
                   return Center(child: CircularProgressIndicator());
-                return RefreshIndicator(
-                  onRefresh: bookingsCtl.relaodBookings,
-                  child: ListView(
-                    children: [
-                      Row(
-                        children: [
-                          Text('Solicitudes', style: subtitlePage),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: kaccentColor, shape: BoxShape.circle),
-                            margin: EdgeInsets.only(left: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('${bookingsCtl.bookingsPending.length}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700)),
-                          )
-                        ],
-                      ),
-                      PendingBookings(bookings: bookingsCtl.bookingsPending),
-                      SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Text('Próximos servicios', style: subtitlePage),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: kaccentColor, shape: BoxShape.circle),
-                            margin: EdgeInsets.only(left: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('${bookingsCtl.bookings.length}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700)),
-                          )
-                        ],
-                      ),
-                      PendingBookings(bookings: bookingsCtl.bookings),
-                    ],
-                  ),
+                return ListView(
+                  children: [
+                    Row(
+                      children: [
+                        Text('Solicitudes', style: subtitlePage),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: kaccentColor, shape: BoxShape.circle),
+                          margin: EdgeInsets.only(left: 8.0),
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('${bookingsCtl.bookingsPending.length}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700)),
+                        )
+                      ],
+                    ),
+                    PendingBookings(bookings: bookingsCtl.bookingsPending),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text('Próximos servicios', style: subtitlePage),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: kaccentColor, shape: BoxShape.circle),
+                          margin: EdgeInsets.only(left: 8.0),
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('${bookingsCtl.bookings.length}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700)),
+                        )
+                      ],
+                    ),
+                    PendingBookings(bookings: bookingsCtl.bookings),
+                  ],
                 );
               }),
             ),

@@ -7,7 +7,7 @@ import 'package:reserly_manager/styles/text_style.dart';
 class PendingBookings extends StatelessWidget {
   final List<Booking> bookings;
 
-  const PendingBookings({Key key, this.bookings}) : super(key: key);
+  const PendingBookings({Key? key, required this.bookings}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

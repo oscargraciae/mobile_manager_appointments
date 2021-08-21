@@ -1,30 +1,52 @@
 import 'package:get/route_manager.dart';
-import 'package:reserly_manager/modules/booking/booking_detail_page.dart';
 import 'package:reserly_manager/modules/home/home_page.dart';
+import 'package:reserly_manager/modules/landing/landing_page.dart';
 import 'package:reserly_manager/modules/login/login_page.dart';
+import 'package:reserly_manager/modules/onboarding/onboarding_page.dart';
+import 'package:reserly_manager/modules/services/new_service/new_service_page.dart';
 import 'package:reserly_manager/modules/signup/signup_page.dart';
-
+import 'package:reserly_manager/routes/app_routes.dart';
 
 class AppPages {
-  
-  static const INITIAL = '/loin';
+  static const INITIAL = '/landing';
 
   static final routes = [
     GetPage(
-      name: '/login', 
-      page:()=> LoginPage(),
+      name: AppRoutes.LANDING,
+      page: () => LandingPage(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: '/signup', 
-      page:()=> SignupPage(),
+      name: AppRoutes.LOGIN,
+      page: () => LoginPage(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: '/home', 
-      page:()=> HomePage(),
+      name: AppRoutes.SIGNUP,
+      page: () => SignupPage(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: '/booking', 
-      page:()=> BookingDetailPage(),
+      name: AppRoutes.HOME,
+      page: () => HomePage(),
+      transition: Transition.rightToLeft,
+      // middlewares: [
+      //   MiddlewareAuth(),
+      // ],
     ),
+    GetPage(
+      name: AppRoutes.ONBOARDING,
+      page: () => OnBoardingPage(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.NEW_SERVICE,
+      page: () => NewServicePage(),
+      transition: Transition.rightToLeft,
+    ),
+    // GetPage(
+    //   name: AppRoutes.BOOKINS,
+    //   page: () => BookingDetailPage(),
+    // ),
   ];
 }

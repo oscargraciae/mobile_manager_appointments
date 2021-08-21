@@ -3,18 +3,17 @@ import 'package:reserly_manager/instances/dio_instance.dart';
 import 'package:reserly_manager/models/booking.dart';
 
 class BookingService {
-  static Future<BookingsResponse> getAll({int status, DateTime endDate, DateTime startDate}) async {
+  static Future<BookingsResponse> getAll({ required int status, required DateTime endDate }) async {
     try {
       var dio = new DioInstance().instance;
       final response = await dio.get('/bookings', queryParameters: {
         "status": status,
         "dateEnd": endDate,
-        'startDate': startDate,
       });
-      // print('Clientes===> $status ----- ${response.data['bookings'][0]}');
       return BookingsResponse.fromJson(response.data);
     } on DioError {
-      return BookingsResponse(success: false);
+      // return BookingsResponse(success: false);
+      throw 'Error';
     }  
   }
 

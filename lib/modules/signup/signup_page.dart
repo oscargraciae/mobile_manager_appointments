@@ -1,78 +1,97 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reserly_manager/config/theme.dart';
+import 'package:reserly_manager/modules/signup/signup_controller.dart';
+import 'package:reserly_manager/widgets/Button.dart';
+import 'package:reserly_manager/widgets/InputField.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
 
 class SignupPage extends StatelessWidget {
+  SignupController signupController = Get.put(SignupController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Crear cuenta'),
+        centerTitle: true,
+        elevation: 0,
+      ),
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 28, vertical: 32),
-          child: Column(
-            children: [
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 16.0),
-                    Image(
-                      image: AssetImage('images/reserly-logo.png'),
-                      width: 200.0,
+        child: SingleChildScrollView (
+          reverse: true,
+          child: Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Bienvenido',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 20.0),
-                    Text(
-                      'Join us to start selling',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    
-                    Text(
-                        'Discover your perfect university',
-                        style: TextStyle(),
-                        textAlign: TextAlign.center)
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 0),
-                child: Column(
-                  children: [
-                    // inputField( onChanged: () {}, label: 'Nombre'),
-                    SizedBox(height: 10.0),
-                    // inputField( onChanged: () {}, label: 'Apellido'),
-                    SizedBox(height: 10.0),
-                    // inputField( onChanged: () {}, label: 'Correo eletrónico'),
-                    SizedBox(height: 10.0),
-                    // inputPasswordField(),
-                    SizedBox(height: 20.0),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RaisedButton(
-                        textColor: Colors.white,
-                        color: kPrimaryColor,
-                        child: Text('CREAR CUENTA'),
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: FlatButton(
-                    child: Text('Regresar a iniciar sesióin'),
-                    onPressed: () {
-                      Get.back();
-                    },
                   ),
-                ),
+                  Text(
+                    'Registrate gratis.',
+                    style: TextStyle(),
+                    textAlign: TextAlign.center
+                  ),
+                  SizedBox(height: 24.0),
+                  Obx(() {
+                    if (signupController.isLoading.value)
+                      return Center(child: CircularProgressIndicator());
+                    else return Form(
+                      key: signupController.formKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            children: [
+                              Flexible(child: InputField(label: 'Nombre', controller: signupController.firstNameCtrl, textCapitalization: TextCapitalization.words)),
+                              SizedBox(width: 16.0),
+                              Flexible(child: InputField(label: 'Apellido', controller: signupController.lastNameCtrl, textCapitalization: TextCapitalization.words)),
+                            ],
+                          ),
+                          SizedBox(height: 12.0),
+                          InputField(label: 'Correo eletrónico', keyboardType: TextInputType.emailAddress, controller: signupController.emailCtrl),
+                          SizedBox(height: 12.0),
+                          InputField(label: 'Contraseña', controller: signupController.passwordCtrl, obscureText: true),
+                          SizedBox(height: 36.0),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Button(text: 'Crear cuenta', onPressed: () => signupController.createAccount(), color: kPrimaryColor),
+                              SizedBox(height: 12.0),
+                              RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                    style: TextStyle(color: Colors.black),
+                                    children: [
+                                      TextSpan(text: 'Al registrarte, confirmas que aceptas los'),
+                                      TextSpan(text: 'Términos y condiciones', style: TextStyle(color: kPrimaryColor), recognizer: new TapGestureRecognizer()..onTap = () => signupController.openUrlTerms()),
+                                      TextSpan(text: ' y la '),
+                                      TextSpan(text: 'Política de privacidad', style: TextStyle(color: kPrimaryColor), recognizer: new TapGestureRecognizer()..onTap = () => signupController.openUrlPolicity())
+                                    ]
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  })
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

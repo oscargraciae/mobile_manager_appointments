@@ -10,14 +10,14 @@ class Customer {
     this.isActive,
   });
 
-  DateTime createdAt;
-  DateTime updatedAt;
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  dynamic phone;
-  bool isActive;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? phone;
+  bool? isActive;
 
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
     createdAt: DateTime.parse(json["createdAt"]),
@@ -31,8 +31,8 @@ class Customer {
   );
 
   Map<String, dynamic> toJson() => {
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt!.toIso8601String(),
+    "updatedAt": updatedAt!.toIso8601String(),
     "id": id,
     "email": email,
     "firstName": firstName,

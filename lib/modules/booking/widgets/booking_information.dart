@@ -9,7 +9,7 @@ import 'package:reserly_manager/utils/status_colors.dart';
 class BookingInformation extends StatelessWidget {
   final Booking booking;
 
-  const BookingInformation({Key key, @required this.booking}) : super(key: key);
+  const BookingInformation({Key? key, required this.booking}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

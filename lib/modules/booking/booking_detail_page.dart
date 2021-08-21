@@ -5,6 +5,7 @@ import 'package:reserly_manager/modules/booking/booking_detail_controller.dart';
 import 'package:reserly_manager/modules/booking/widgets/booking_information.dart';
 import 'package:reserly_manager/modules/booking/widgets/bottom_buttons.dart';
 import 'package:reserly_manager/modules/booking/widgets/services_list.dart';
+import 'package:reserly_manager/services/booking_service.dart';
 
 class BookingDetailPage extends StatelessWidget {
   final bookingCtl = Get.put(BookingDetailController());
@@ -51,13 +52,9 @@ class BookingDetailPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              BookingInformation(
-                                booking: bookingCtl.booking.value,
-                              ),
+                              BookingInformation(booking: bookingCtl.booking.value),
                               SizedBox(height: 28),
-                              ServicesList(
-                                  bookingServices:
-                                      bookingCtl.booking.value.bookingService),
+                              // ServicesList(bookingServices: bookingCtl.booking.value.bookingService == true ? bookingCtl.booking.value.bookingService : null),
                               SizedBox(height: 60),
                             ],
                           ),

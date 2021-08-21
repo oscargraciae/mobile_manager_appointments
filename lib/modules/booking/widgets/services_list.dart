@@ -4,7 +4,7 @@ import 'package:reserly_manager/models/booking_service.dart';
 class ServicesList extends StatelessWidget {
   final List<BookingService> bookingServices;
 
-  const ServicesList({Key key, this.bookingServices}) : super(key: key);
+  const ServicesList({ Key? key, required this.bookingServices }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -6,9 +6,4 @@ class NavController extends GetxController {
 
   get selectedIndex => this._selectedIndex.value;
   set selectedIndex(index) => this._selectedIndex.value = index;
-
-  // changeIndex(index) {
-  //   _selectedIndex.value = index;
-  //   // update();
-  // }
 }

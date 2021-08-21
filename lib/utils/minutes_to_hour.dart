@@ -3,10 +3,10 @@ String minutesToHour (int minutes) {
   var min = ((hour % 1) * 60).toInt();
 
   if (min == 0) {
-    return '${hour.truncate()}h';
+    return '${hour.truncate()} hrs';
   } else if(hour < 1) {
-    return '${min}m';
+    return '${min} mins';
   } else {
-    return '${hour.truncate()}:${min.truncate()}h';
+    return '${hour.truncate()}:${min.truncate()} hrs';
   } 
 }

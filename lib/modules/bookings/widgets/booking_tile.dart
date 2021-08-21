@@ -9,7 +9,7 @@ import 'package:reserly_manager/utils/status_colors.dart';
 class BookingTile extends StatelessWidget {
   final Booking booking;
 
-  const BookingTile({Key key, @required this.booking}) : super(key: key);
+  const BookingTile({Key? key, required this.booking}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,7 @@ class BookingTile extends StatelessWidget {
         border: Border(left: BorderSide(width: 4.0, color: statusColor(booking.bookingStatusId))),
       ),
       child: ListTile(
-        onTap: () {
-          Get.toNamed('/booking', arguments: booking);
-        },
+        onTap: () => Get.toNamed('/booking', arguments: booking),
         tileColor: Colors.white,
         title: Text('${booking.customer.firstName} ${booking.customer.lastName}', style: tileTitle, maxLines: 1,),
         subtitle: Text(formatDateLG(booking.bookingDate), style: tileSubtitle),

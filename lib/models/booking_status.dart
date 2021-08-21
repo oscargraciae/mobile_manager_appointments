@@ -4,8 +4,8 @@ class BookingStatus {
     this.name,
   });
 
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   factory BookingStatus.fromJson(Map<String, dynamic> json) => BookingStatus(
     id: json["id"],

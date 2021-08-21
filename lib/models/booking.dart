@@ -10,8 +10,8 @@ String bookingsResponseToJson(BookingsResponse data) => json.encode(data.toJson(
 
 class BookingsResponse {
   BookingsResponse({
-    this.success,
-    this.bookings,
+    required this.success,
+    required this.bookings,
   });
 
   bool success;
@@ -31,12 +31,12 @@ class BookingsResponse {
 
 class BookingResponse {
   BookingResponse({
-    this.success,
+    required this.success,
     this.booking,
   });
 
   bool success;
-  Booking booking;
+  Booking? booking;
 
   factory BookingResponse.fromJson(Map<String, dynamic> json) => BookingResponse(
     success: json["success"],
@@ -45,27 +45,27 @@ class BookingResponse {
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "bookings": booking.toJson(),
+    "bookings": booking!.toJson(),
   };
 }
 
 class Booking {
   Booking({
-    this.createdAt,
-    this.updatedAt,
-    this.id,
-    this.bookingDate,
-    this.bookingTime,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.id,
+    required this.bookingDate,
+    required this.bookingTime,
     this.message,
-    this.isActive,
-    this.totalTime,
-    this.totalPrice,
-    this.customerId,
-    this.businessId,
-    this.bookingStatusId,
-    this.customer,
-    this.bookingStatus,
-    this.bookingService,
+    required this.isActive,
+    required this.totalTime,
+    required this.totalPrice,
+    required this.customerId,
+    required this.businessId,
+    required this.bookingStatusId,
+    required this.customer,
+    required this.bookingStatus,
+    required this.bookingService,
   });
 
   DateTime createdAt;
@@ -73,7 +73,7 @@ class Booking {
   int id;
   DateTime bookingDate;
   String bookingTime;
-  String message;
+  String? message;
   bool isActive;
   int totalTime;
   int totalPrice;
@@ -103,20 +103,20 @@ class Booking {
   );
 
   Map<String, dynamic> toJson() => {
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "id": id,
-        "bookingDate": bookingDate.toIso8601String(),
-        "bookingTime": bookingTime,
-        "message": message,
-        "isActive": isActive,
-        "totalTime": totalTime,
-        "totalPrice": totalPrice,
-        "customerId": customerId,
-        "businessId": businessId,
-        "bookingStatusId": bookingStatusId,
-        "customer": customer.toJson(),
-        "bookingStatus": bookingStatus.toJson(),
-        "bookingService": List<dynamic>.from(bookingService.map((x) => x.toJson())),
-      };
+      "createdAt": createdAt.toIso8601String(),
+      "updatedAt": updatedAt.toIso8601String(),
+      "id": id,
+      "bookingDate": bookingDate.toIso8601String(),
+      "bookingTime": bookingTime,
+      "message": message,
+      "isActive": isActive,
+      "totalTime": totalTime,
+      "totalPrice": totalPrice,
+      "customerId": customerId,
+      "businessId": businessId,
+      "bookingStatusId": bookingStatusId,
+      "customer": customer.toJson(),
+      "bookingStatus": bookingStatus.toJson(),
+      "bookingService": List<dynamic>.from(bookingService.map((x) => x.toJson())),
+    };
 }
